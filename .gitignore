@@ -13,3 +13,5 @@ _ReSharper.*
 *.Cache
 *.user
 build/*.nupkg
+
+.vs/

@@ -1,0 +1,15 @@
+﻿Content-Type: text/html;
+To: test@example.org
+From: test@example.org
+Subject: Simple email example
+
+<html>
+<head>
+</head>
+<body>
+    <p>The date is: @ViewBag.Date</p>
+    <div>
+        @Html.EmbedImage(new WebClient().DownloadData(@"http://placehold.it/350x150"))
+    </div>
+</body>
+</html>

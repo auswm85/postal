@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Postal;
 
@@ -38,6 +35,14 @@ namespace WebSample.Controllers
             var email = new TypedEmail();
             email.Date = DateTime.UtcNow.ToString();
             
+            return new EmailViewResult(email);
+        }
+
+        public ActionResult PreviewSimpleStreamEmail()
+        {
+            dynamic email = new Email("SimpleStream");
+            email.Date = DateTime.UtcNow.ToString();
+
             return new EmailViewResult(email);
         }
     }

@@ -1,9 +1,9 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 using Should;
 using System.Net.Mail;
 using System.Net.Mime;
 using System.IO;
+using System.Net;
 
 namespace Postal
 {
@@ -111,6 +111,22 @@ namespace Postal
 
                 view.LinkedResources.Count.ShouldEqual(1);
                 view.LinkedResources[0].ShouldBeSameAs(cid);
+            }
+        }
+
+        [Fact]
+        public void Can_Read_From_Byte_Array()
+        {
+            var embedder = new ImageEmbedder();
+
+            using (WebClient webClient = new WebClient())
+            {
+                byte[] data = webClient.DownloadData("http://placehold.it/350x150");
+
+                var resource = embedder.ReferenceImage(data, "image/png");
+
+                resource.ShouldNotBeNull();
+                embedder.HasImages.ShouldBeTrue();
             }
         }
     }

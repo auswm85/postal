@@ -63,6 +63,16 @@ namespace Postal
         }
 
         /// <summary>
+        /// Creates a <see cref="LinkedResource"/> from image byte array.
+        /// </summary>
+        /// <param name="imageData">byte[] of image data.</param>
+        /// <returns>A new <see cref="LinkedResource"/></returns>
+        public static LinkedResource CreateLinkedResource(byte[] imageData)
+        {
+            return new LinkedResource(new MemoryStream(imageData));
+        }
+
+        /// <summary>
         /// Records a reference to the given image.
         /// </summary>
         /// <param name="imagePathOrUrl">The image path or URL.</param>
@@ -82,6 +92,21 @@ namespace Postal
             }
 
             images[imagePathOrUrl] = resource;
+            return resource;
+        }
+
+        /// <summary>
+        /// Records a reference to the given image.
+        /// </summary>
+        /// <param name="imageData">The image data as a byte[]</param>
+        /// <param name="contentType">The content type of the image e.g. "image/png". If null, then content type is determined from the file name extension.</param>
+        /// <returns>A <see cref="LinkedResource"/> representing the embedded image.</returns>
+        public LinkedResource ReferenceImage(byte[] imageData, string contentType)
+        {
+            var resource = new LinkedResource(new MemoryStream(imageData), new ContentType(contentType));
+
+            images[GenerateRandomImageName()] = resource;
+
             return resource;
         }
 
@@ -113,6 +138,15 @@ namespace Postal
             {
                 view.LinkedResources.Add(image.Value);
             }
+        }
+
+        /// <summary>
+        /// Generate random key
+        /// </summary>
+        /// <returns></returns>
+        private string GenerateRandomImageName()
+        {
+            return DateTime.Now.ToFileTime().ToString();
         }
 
     }
