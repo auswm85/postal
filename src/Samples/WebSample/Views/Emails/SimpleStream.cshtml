@@ -9,7 +9,7 @@ Subject: Simple email example
 <body>
     <p>The date is: @ViewBag.Date</p>
     <div>
-        @Html.EmbedImage(new WebClient().DownloadData(@"http://placehold.it/350x150"))
+        @Html.EmbedImage(new WebClient().DownloadData(@"http://placehold.it/350x150"), "alt text")
     </div>
 </body>
 </html>

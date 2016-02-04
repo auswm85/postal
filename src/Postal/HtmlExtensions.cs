@@ -41,7 +41,7 @@ namespace Postal
             var imageEmbedder = (ImageEmbedder)html.ViewData[ImageEmbedder.ViewDataKey];
             var resource = imageEmbedder.ReferenceImage(imageData, "image/png");
 
-            return new HtmlString(string.Format("<img src=\"data:{0};base64,{1}\" alt=\"{2}\"/>", resource.ContentType.ToString(), Convert.ToBase64String(imageData), alt));
+            return new HtmlString(string.Format("<img src=\"cid:{0}\" alt=\"{1}\"/>", resource.ContentId, alt));
         }
 
         static bool IsFileName(string pathOrUrl)
